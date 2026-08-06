@@ -1,0 +1,3 @@
+[submodule "book"]
+	path = book
+	url = https://github.com/SamChawla/django6-mastery.git

@@ -1,0 +1,25 @@
+# Normalize every text file to LF in the repository. Readers clone this on
+# Windows, macOS and Linux, and a chapter diff must look the same everywhere.
+* text=auto eol=lf
+
+# Binary assets: never touch these.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.zip   binary
+*.exe   binary
+*.sqlite3 binary
+
+# Generated, so collapse these by default and keep them out of language stats.
+# Note: no `-diff`. A chapter that adds a dependency changes uv.lock, and that
+# IS part of the chapter, so `git diff chapter-16..chapter-17` has to show it.
+# linguist-generated already collapses the file in GitHub's review view.
+static/css/site.css linguist-generated=true
+uv.lock             linguist-generated=true
