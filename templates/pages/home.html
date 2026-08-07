@@ -1,0 +1,22 @@
+<!-- templates/pages/home.html -->
+{% extends "base.html" %}
+
+{% block title %}Welcome to Otahque{% endblock %}
+
+{% block content %}
+  <h1>Welcome to Otahque</h1>
+  <p>A gathering house for your community: events, jobs, and content.</p>
+
+  {% partialdef pillar_card %}
+    <article class="pillar">
+      <h2>{{ pillar.name }}</h2>
+      <p>{{ pillar.blurb }}</p>
+    </article>
+  {% endpartialdef %}
+
+  <section class="pillars">
+    {% for pillar in pillars %}
+      {% partial pillar_card %}
+    {% endfor %}
+  </section>
+{% endblock %}

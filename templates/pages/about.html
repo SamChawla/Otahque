@@ -1,0 +1,14 @@
+<!-- templates/pages/about.html -->
+{% extends "base.html" %}
+
+{% block title %}About Otahque{% endblock %}
+
+{% block content %}
+  <h1>About Otahque</h1>
+  <p>
+    Otahque is an open-source, community-driven platform for organizing events,
+    posting transparent job listings, and publishing content. You are reading it
+    during construction.
+  </p>
+  <p><a href="{% url 'pages:home' %}">Back home</a></p>
+{% endblock %}

@@ -1,0 +1,10 @@
+<!-- templates/pages/section.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ name|title }}{% endblock %}
+
+{% block content %}
+  <h1>{{ name|title }}</h1>
+  <p>The {{ name }} section is coming soon.</p>
+  <p><a href="{% url 'pages:home' %}">Back home</a></p>
+{% endblock %}
