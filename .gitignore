@@ -1,0 +1,24 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environment
+.venv/
+
+# Environment and secrets
+.env
+
+# Django
+db.sqlite3
+*.log
+media/
+staticfiles/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
