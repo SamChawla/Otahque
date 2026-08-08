@@ -45,6 +45,10 @@ class Event(models.Model):
     )
     description = models.TextField(blank=True)
     location = models.CharField(max_length=200)
+    is_featured = models.BooleanField(
+        default=False,
+        help_text="Featured events appear on the community homepage.",
+    )
     is_online = models.BooleanField(
         default=False,
         help_text="Online events show a join link instead of a venue map.",
