@@ -21,6 +21,11 @@ def by_location(location: str) -> QuerySet[Event]:
     return published().filter(location__iexact=location)
 
 
+def by_category(slug: str) -> QuerySet[Event]:
+    """Published events in a category, by its slug."""
+    return published().filter(category__slug=slug)
+
+
 def search(term: str) -> QuerySet[Event]:
     """Published events mentioning the term in title or description."""
     return published().filter(

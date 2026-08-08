@@ -1,4 +1,5 @@
 # events/models.py
+from django.conf import settings
 from django.db import models
 
 
@@ -37,6 +38,21 @@ class Event(models.Model):
         PUBLISHED = "published", "Published"
         CANCELLED = "cancelled", "Cancelled"
 
+    organizer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name="events_organized",
+        null=True,
+        blank=True,
+    )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.PROTECT,
+        related_name="events",
+        null=True,
+        blank=True,
+    )
+    tags = models.ManyToManyField(Tag, related_name="events", blank=True)
     title = models.CharField(max_length=200)
     slug = models.SlugField(
         max_length=200,
