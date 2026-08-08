@@ -2,6 +2,8 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
+from events import queries
+
 
 def home(request: HttpRequest) -> HttpResponse:
     """The Otahque homepage, listing the three community pillars."""
@@ -21,3 +23,12 @@ def about(request: HttpRequest) -> HttpResponse:
 def section_placeholder(request: HttpRequest, name: str) -> HttpResponse:
     """A stand-in page for a section; `name` is captured by a path converter."""
     return render(request, "pages/section.html", {"name": name})
+
+
+def page_not_found(request: HttpRequest, exception: Exception) -> HttpResponse:
+    context = {"path": request.path, "suggestions": queries.upcoming()[:3]}
+    return render(request, "404.html", context, status=404)
+
+
+def server_error(request: HttpRequest) -> HttpResponse:
+    return render(request, "500.html", status=500)

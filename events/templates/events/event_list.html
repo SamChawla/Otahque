@@ -1,0 +1,44 @@
+<!-- events/templates/events/event_list.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ heading }} | Otahque{% endblock %}
+
+{% block content %}
+  <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
+    <h1 class="font-serif text-3xl font-semibold tracking-tight">{{ heading }}</h1>
+    <form method="get" action="{% url 'events:list' %}" class="join">
+      <label class="input input-bordered join-item flex items-center gap-2">
+        <input type="search" name="q" value="{{ query }}" placeholder="Search events" aria-label="Search events">
+      </label>
+      <button type="submit" class="btn btn-primary join-item">Search</button>
+    </form>
+  </div>
+
+  {% partialdef event_card %}
+    <article class="card bg-base-100 border border-base-300">
+      <div class="card-body">
+        <h2 class="card-title text-lg">{{ event.title }}</h2>
+        {% if event.category %}
+          <span class="badge badge-outline">{{ event.category.name }}</span>
+        {% endif %}
+        <p class="text-base-content/70">{{ event.starts_at|date:"l, N j" }} at {{ event.starts_at|time:"P" }}</p>
+        <p class="text-base-content/70">{% if event.is_online %}Online{% else %}{{ event.location }}{% endif %}</p>
+        <div class="card-actions justify-end">
+          <a href="{% url 'events:detail' event.slug %}" class="btn btn-ghost btn-sm">View event</a>
+        </div>
+      </div>
+    </article>
+  {% endpartialdef %}
+
+  {% if events %}
+    <section class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {% for event in events %}
+        {% partial event_card %}
+      {% endfor %}
+    </section>
+  {% else %}
+    <div class="alert">
+      <span>No events match. Try a different search, or check back soon.</span>
+    </div>
+  {% endif %}
+{% endblock %}
