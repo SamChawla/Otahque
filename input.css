@@ -1,0 +1,138 @@
+/* input.css */
+@import "tailwindcss";
+
+/* Do not scan the binary or the daisyUI bundles as template source. */
+@source not "./tailwindcss";
+@source not "./tailwindcss.exe";
+@source not "./daisyui{,*}.mjs";
+
+/* Load daisyUI, with every built-in theme still selectable. No picker uses
+   them yet (Act IV adds one), but leaving the door open now costs nothing
+   and avoids reworking this line later. */
+@plugin "./daisyui.mjs" {
+  themes: all;
+}
+
+/* Otahque's own theme pair. Both share identical geometry: radii, control
+   height, and border width never move when the theme changes, only color
+   does. See docs/design.md section 3 for the palette and section 5 for the
+   geometry tokens this block is built from. */
+@plugin "./daisyui-theme.mjs" {
+  name: "otahque-light";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: oklch(99% 0.005 85);
+  --color-base-200: oklch(95.5% 0.010 84);
+  --color-base-300: oklch(90% 0.014 82);
+  --color-base-content: oklch(26% 0.020 62);
+  --color-primary: oklch(47% 0.155 276);
+  --color-primary-content: oklch(97% 0.012 276);
+  --color-secondary: oklch(78% 0.145 76);
+  --color-secondary-content: oklch(27% 0.055 76);
+  --color-accent: oklch(60% 0.085 193);
+  --color-accent-content: oklch(97% 0.015 193);
+  --color-neutral: oklch(34% 0.022 62);
+  --color-neutral-content: oklch(95% 0.010 84);
+  --color-info: oklch(58% 0.105 242);
+  --color-info-content: oklch(97% 0.012 242);
+  --color-success: oklch(58% 0.105 152);
+  --color-success-content: oklch(97% 0.015 152);
+  --color-warning: oklch(68% 0.125 62);
+  --color-warning-content: oklch(98% 0.012 62);
+  --color-error: oklch(55% 0.170 27);
+  --color-error-content: oklch(97% 0.015 27);
+
+  --radius-selector: 2rem;
+  --radius-field: 0.625rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.275rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin "./daisyui-theme.mjs" {
+  name: "otahque-dark";
+  prefersdark: true;
+  color-scheme: dark;
+
+  --color-base-100: oklch(26% 0.012 68);
+  --color-base-200: oklch(22% 0.010 68);
+  --color-base-300: oklch(32% 0.014 68);
+  --color-base-content: oklch(91% 0.014 82);
+  --color-primary: oklch(74% 0.125 278);
+  --color-primary-content: oklch(21% 0.045 278);
+  --color-secondary: oklch(82% 0.125 78);
+  --color-secondary-content: oklch(25% 0.055 78);
+  --color-accent: oklch(78% 0.095 190);
+  --color-accent-content: oklch(23% 0.040 190);
+  --color-neutral: oklch(33% 0.014 68);
+  --color-neutral-content: oklch(91% 0.014 82);
+  --color-info: oklch(76% 0.095 240);
+  --color-info-content: oklch(22% 0.040 240);
+  --color-success: oklch(76% 0.115 154);
+  --color-success-content: oklch(22% 0.040 154);
+  --color-warning: oklch(79% 0.130 56);
+  --color-warning-content: oklch(23% 0.045 56);
+  --color-error: oklch(72% 0.140 25);
+  --color-error-content: oklch(22% 0.045 25);
+
+  /* Identical to otahque-light. Geometry is theme-independent by rule. */
+  --radius-selector: 2rem;
+  --radius-field: 0.625rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.275rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+/* Typography. Three self-hosted variable fonts declared once, with names we
+   choose ourselves rather than trusting each font's embedded metadata. Figtree
+   fills Tailwind's font-sans slot (the default UI and body face); Fraunces
+   takes font-serif for the display headings; JetBrains Mono takes font-mono
+   for anything numeric, once a later chapter has numbers worth aligning. */
+@font-face {
+  font-family: "Figtree";
+  src: url("../fonts/figtree-var.woff2") format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../fonts/fraunces-var.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/jetbrains-mono-var.woff2") format("woff2-variations");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Fraunces carries a SOFT axis that rounds its terminals and a WONK axis that
+   turns on its handmade letterforms. That pairing is most of what makes this
+   typeface read as a deliberate choice rather than a default, so we dial it
+   in globally wherever font-serif is used rather than per heading. */
+.font-serif {
+  font-variation-settings: "SOFT" 40, "WONK" 1;
+}

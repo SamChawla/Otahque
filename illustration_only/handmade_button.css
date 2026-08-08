@@ -1,0 +1,18 @@
+/* illustration_only/handmade_button.css */
+/* Educational illustration only: the work daisyUI's `btn` class does for us. */
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #5e81ac;
+  color: #eceff4;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.button-primary:hover {
+  background-color: #4c6a90;
+}

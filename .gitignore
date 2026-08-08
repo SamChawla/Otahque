@@ -17,6 +17,13 @@ db.sqlite3
 media/
 staticfiles/
 
+# Tailwind standalone toolchain
+/tailwindcss
+/tailwindcss.exe
+
+# Compiled CSS (rebuilt by the Tailwind CLI)
+/static/css/site.css
+
 # OS and editor noise
 .DS_Store
 Thumbs.db
